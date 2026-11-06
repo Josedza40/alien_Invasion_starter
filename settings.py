@@ -37,7 +37,7 @@ class Settings:
 
     def initialize_dynamic_settings(self):
         self.ship_speed = 5
-        self.starting_ship_count = 5
+        self.starting_ship_count = 3
             
         self.bullet_speed = 7
         self.bullet_w = 25
