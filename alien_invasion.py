@@ -26,9 +26,9 @@ class AlienInvasion:
         self.bg = pygame.transform.scale(self.bg,
             (self.settings.screen_w, self.settings.screen_h)
             )
-
-        self.game_stats = GameStats(self)
-        self.HUD = HUD(self)
+        #Milestone2/Final: Game stats and HUD
+        # self.game_stats = GameStats(self)
+        # self.HUD = HUD(self)
         self.running = True
         self.clock = pygame.time.Clock()
 
@@ -40,11 +40,13 @@ class AlienInvasion:
         self.impact_sound.set_volume(0.7)
 
         self.ship = Ship(self, Arsenal(self))
-        self.alien_fleet = AlienFleet(self)
-        self.alien_fleet.create_fleet()
+        # Milestone 2: Alien Fleet
+        # self.alien_fleet = AlienFleet(self)
+        # self.alien_fleet.create_fleet()
 
-        self.play_button = Button(self, 'Play')
-        self.game_active = False
+        # Final Submission: Play Button and game states
+        # self.play_button = Button(self, 'Play')
+        self.game_active = True
 
     def run_game(self):
         #Game loop
@@ -57,8 +59,9 @@ class AlienInvasion:
                     self.laser_sound.play()
                     self.laser_sound.fadeout(250)
 
-                self.alien_fleet.update_fleet()
-                self._check_collisions()
+                # Milestone 2: Fleet and collision logic
+                # self.alien_fleet.update_fleet()
+                # self._check_collisions()
                 
                 
             self._update_screen()
@@ -119,30 +122,35 @@ class AlienInvasion:
 
 
     def _update_screen(self):
+        """Draw the Milestone 1 prototype."""
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
-        self.alien_fleet.draw()
-        self.HUD.draw()
+        # Milestone 2: Alien Fleet
+        # self.alien_fleet.draw()
 
-        if not self.game_active:
-            self.play_button.draw()
-            pygame.mouse.set_visible(True)
+        # Final Submission: HUD and Play Button 
+        # self.HUD.draw()
+        # if not self.game_active:
+        #    self.play_button.draw()
+        #    pygame.mouse.set_visible(True)
 
         pygame.display.flip()
+
 
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-                self.game_stats.save_scores()
+                # self.game_stats.save_scores()
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN and self.game_active == True:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                self._check_button_clicked() 
+            # Final Submission: Play button    
+            # elif event.type == pygame.MOUSEBUTTONDOWN:
+            #    self._check_button_clicked() 
 
     def _check_button_clicked(self):
         mouse_pos = pygame.mouse.get_pos()
@@ -174,7 +182,7 @@ class AlienInvasion:
             self.ship.arsenal.rapid_fire_active = True                
         elif event.key == pygame.K_q:
             self.running = False
-            self.game_stats.save_scores()
+            # self.game_stats.save_scores()
             pygame.quit()
             sys.exit()    
 
