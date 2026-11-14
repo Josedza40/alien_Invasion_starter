@@ -47,7 +47,7 @@ I also temporarily disabled the alien fleet, scoring system, HUD, and Play butto
 
 ## Milestone Demonstrations
 
-**Milestone_1_Demo:** YouTube link will be added after recording.
+**Milestone_1_Demo:** https://youtu.be/Qi1usb292Ns.
 
 **Milestone_2_Demo:** Coming soon.
 
