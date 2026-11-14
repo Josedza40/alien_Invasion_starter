@@ -52,6 +52,11 @@ class AlienInvasion:
             self._check_events()
             if self.game_active:
                 self.ship.update()
+
+                if self.ship.arsenal.update_rapid_fire():
+                    self.laser_sound.play()
+                    self.laser_sound.fadeout(250)
+
                 self.alien_fleet.update_fleet()
                 self._check_collisions()
                 
@@ -148,9 +153,10 @@ class AlienInvasion:
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False       
-    
-    
+            self.ship.moving_left = False 
+        elif event.key == pygame.K_r:
+            self.ship.arsenal.rapid_fire_active = False
+
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
@@ -163,7 +169,9 @@ class AlienInvasion:
         elif event.key == pygame.K_s:
             if self.ship.fire_spread():
                 self.laser_sound.play()
-                self.laser_sound.fadeout(250)        
+                self.laser_sound.fadeout(250)
+        elif event.key == pygame.K_r:
+            self.ship.arsenal.rapid_fire_active = True                
         elif event.key == pygame.K_q:
             self.running = False
             self.game_stats.save_scores()

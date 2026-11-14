@@ -10,14 +10,21 @@ class Arsenal:
         self.game = game
         self.settings = game.settings
         self.arsenal = pygame.sprite.Group()
+        self.last_rapid_shot = 0
+        self.rapid_fire_active = False
 
     def update_arsenal(self):
         self.arsenal.update()
         self._remove_bullets_off_screen()
 
     def _remove_bullets_off_screen(self):
+        """Remove bullets that leave any side of the screen."""
         for bullet in self.arsenal.copy():
-            if bullet.rect.bottom <= 0:
+            if (
+                bullet.rect.bottom <= 0
+                or bullet.rect.right <= 0
+                or bullet.rect.left >= self.settings.screen_w
+            ):
                 self.arsenal.remove(bullet)
 
     def draw(self):
@@ -40,4 +47,15 @@ class Arsenal:
                 new_bullet = Bullet(self.game, direction_x=direction)
                 self.arsenal.add(new_bullet)
             return True
+        return False
+    
+    def update_rapid_fire(self):
+        """Fire repeatedly while rapid fire is active."""
+        if not self.rapid_fire_active:
+            return False
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_rapid_shot >= self.settings.rapid_fire_delay:
+            if self.fire_bullet():
+                self.last_rapid_shot = current_time
+                return True
         return False
