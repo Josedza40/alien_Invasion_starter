@@ -1,18 +1,33 @@
+"""
+Program Name: Alien Invasion - Battle Mode
+Author: Jose Daniel Zambrano
+Purpose: Run the main game loop, process keyboard input,
+         update the ship and weapons, and draw the game screen.
+Starter Code Links: https://github.com/RedBeard41/alien_Invasion_starter
+Date Updated: November 14, 2026
+"""
+
+
+
 import sys
 import pygame
 from settings import Settings
-from game_stats import GameStats
+# from game_stats import GameStats
 from ship import Ship
 from arsenal import Arsenal
-#from alien import Alien
-from alien_fleet import AlienFleet
-from time import  sleep
-from button import Button
-from hud import HUD
+# from alien import Alien
+# from alien_fleet import AlienFleet
+# from time import  sleep
+# from button import Button
+# from hud import HUD
 
 class AlienInvasion:
-
+    """Manage the main game loop, events, and game components."""
     def __init__(self):
+        """Initialize the game and its main components.
+
+    Set up Pygame, the game window, background, sounds,
+    player ship, and weapon system for Milestone 1."""
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
@@ -49,6 +64,7 @@ class AlienInvasion:
         self.game_active = True
 
     def run_game(self):
+        """Run the main game loop and continuously update the screen."""
         #Game loop
         while self.running:
             self._check_events()
@@ -68,6 +84,7 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _check_collisions(self):
+        """Check collisions between the ship, aliens, and bullets."""
         #check collisions for ship 
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
@@ -93,7 +110,7 @@ class AlienInvasion:
             self.HUD._update_level()   
 
     def _check_game_status(self):
-        
+        """Update remaining lives and determine whether the game ends."""
         if self.game_stats.ship_left > 0:
             self.game_stats.ship_left -= 1
             self._reset_level()
@@ -106,11 +123,13 @@ class AlienInvasion:
 
 
     def _reset_level(self):
+        """Clear existing bullets and rebuild the alien fleet."""
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
 
     def restart_game(self):
+        """Reset the game and begin a new session."""
         self.settings.initialize_dynamic_settings()
         self.game_stats.reset_stats()
         self.HUD.update_scores()
@@ -138,6 +157,7 @@ class AlienInvasion:
 
 
     def _check_events(self):
+        """Process keyboard, mouse, and window events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -153,11 +173,13 @@ class AlienInvasion:
             #    self._check_button_clicked() 
 
     def _check_button_clicked(self):
+        """Check whether the player clicked the Play button."""
         mouse_pos = pygame.mouse.get_pos()
         if self.play_button.check_clicked(mouse_pos):
             self.restart_game()   
 
     def _check_keyup_events(self, event):
+        """Stop movement or rapid fire when keys are released."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
@@ -166,6 +188,7 @@ class AlienInvasion:
             self.ship.arsenal.rapid_fire_active = False
 
     def _check_keydown_events(self, event):
+        """Handle key presses for movement and weapon controls."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:

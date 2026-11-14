@@ -1,7 +1,20 @@
+"""
+Program Name: Alien Invasion - Battle Mode
+Author: Jose Daniel Zambrano
+Purpose: Store the game's display settings, asset paths,
+         weapon configurations, and difficulty settings.
+Starter Code Links: https://github.com/RedBeard41/alien_Invasion_starter
+Date Updated: November 14, 2026
+"""
+
+
+
 from pathlib import Path
 class Settings:
+    """Store configuration values used throughout the game."""
     
     def __init__(self):
+        """Initialize the game's display, asset, and interface settings."""
         self.name: str = 'Alien Invasion - Battle Mode - Track 1'
         self.screen_w = 1200
         self.screen_h = 800
@@ -36,6 +49,7 @@ class Settings:
 
 
     def initialize_dynamic_settings(self):
+        """Initialize gameplay values that can change during the game."""
         self.ship_speed = 5
         self.starting_ship_count = 3
             
@@ -55,6 +69,7 @@ class Settings:
 
 
     def increase_difficulty(self):
+        """Increase movement speeds using the difficulty multiplier."""
         self.ship_speed *= self.difficulty_scale  
         self.bullet_speed *= self.difficulty_scale
         self.fleet_speed *= self.difficulty_scale

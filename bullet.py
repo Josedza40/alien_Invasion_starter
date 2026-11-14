@@ -1,3 +1,12 @@
+"""
+Program Name: Alien Invasion - Battle Mode
+Author: Jose Daniel Zambrano
+Purpose: Manage bullet creation, movement, and drawing
+         for normal and spread-shot firing modes.
+Starter Code Links: https://github.com/RedBeard41/alien_Invasion_starter
+Date Updated: November 14, 2026
+"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -6,7 +15,9 @@ if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
 class Bullet(Sprite):
+    """Represent a projectile fired by the player's ship."""
     def __init__(self, game: 'AlienInvasion', direction_x = 0):
+        """Initialize the bullet's position and settings."""
         super().__init__()
             
         self.screen = game.screen
@@ -32,4 +43,5 @@ class Bullet(Sprite):
             self.rect.x = round(self.x)
 
     def draw_bullet(self):
+        """Draw the bullet to the screen."""
         self.screen.blit(self.image, self.rect)
