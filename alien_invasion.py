@@ -114,7 +114,7 @@ class AlienInvasion:
         if self.game_stats.ship_left > 0:
             self.game_stats.ship_left -= 1
             self._reset_level()
-            sleep(0.5)
+            # sleep(0.5)
         else:
             self.game_active = False    
         
