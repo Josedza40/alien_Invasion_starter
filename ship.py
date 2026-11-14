@@ -47,7 +47,11 @@ class Ship:
         self.screen.blit(self.image, self.rect)    
 
     def fire(self):
-        return self.arsenal.fire_bullet()   
+        return self.arsenal.fire_bullet()
+
+    def fire_spread(self):
+        """Tell the arsenal to fire a spread shot."""
+        return self.arsenal.fire_spread_shot()
 
     def check_collisions(self, other_group):
         if pygame.sprite.spritecollideany(self, other_group): 

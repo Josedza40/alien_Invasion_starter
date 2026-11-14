@@ -30,7 +30,14 @@ class Arsenal:
             self.arsenal.add(new_bullet)
             return True
         return False
+    
+    def fire_spread_shot(self):
+        """Fire three bullets in different directions."""
+        directions = [-1, 0, 1]
 
-                    
-
-        
+        if len(self.arsenal) + len(directions) <= self.settings.bullet_amount:
+            for direction in directions:
+                new_bullet = Bullet(self.game, direction_x=direction)
+                self.arsenal.add(new_bullet)
+            return True
+        return False
