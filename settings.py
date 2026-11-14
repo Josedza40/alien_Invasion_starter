@@ -2,7 +2,7 @@ from pathlib import Path
 class Settings:
     
     def __init__(self):
-        self.name: str = 'Alien Invasion'
+        self.name: str = 'Alien Invasion - Battle Mode - Track 1'
         self.screen_w = 1200
         self.screen_h = 800
         self.FPS = 60
@@ -47,6 +47,11 @@ class Settings:
         self.fleet_drop_speed = 40
         self.fleet_speed = 2
         self.alien_points = 50
+
+        self.rapid_fire_delay = 150
+        self.normal_fire_delay = 400
+        self.spread_shot_count = 3
+        self.spread_shot_speed = 7
 
 
     def increase_difficulty(self):
